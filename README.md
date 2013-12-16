@@ -55,6 +55,8 @@ program.parse(process.argv);
 ## Documentation
 `commander-completion` exposes [`commander.js`][] as its `module.exports`. In addition to this, we expose a few more methods.
 
+Currently, you are required to specify the `name` property of your `program`.
+
 [`commander.js`]: http://visionmedia.github.io/commander.js/
 
 ### `program.mixinCompletable(obj)`
@@ -84,8 +86,54 @@ Get completion results for current `command`
     - If `cb` is not provided, `err` will be thrown and `results` will be printed to `stdout` via `console.log`
 
 ## Examples
-_(Coming soon)_
+An full example of `git` would be
 
+```js
+var program = require('commander-completion');
+program.name = 'git';
+program
+  // `git checkout master`
+  .command('checkout')
+  .completion(function (params, cb) {
+    // Get git branches and find matches
+  })
+  .action(function () {
+    // Checkout a `git` branch
+  });
+var remote = program.command('remote');
+remote
+  // `git remote add origin git@github.com:...`
+  // No possible tab completion here
+  .command('add')
+  .action(function () {
+    // Add a `git` remote
+  });
+remote
+  // `git remote rm origin`
+  .command('rm')
+  .completion(function (params, cb) {
+    // Get git branches and find matches
+  })
+  .action(function () {
+    // Remove a `git` remote
+  });
+
+program.complete({
+  // `git remo|add`
+  line: 'git remoadd',
+  cursor: 8
+}, function (err, results) {
+  results; // ['remote']
+});
+
+program.complete({
+  // `git remote |`
+  line: 'git remote',
+  cursor: 11
+}, function (err, results) {
+  results; // ['add', 'remove']
+});
+```
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
 
