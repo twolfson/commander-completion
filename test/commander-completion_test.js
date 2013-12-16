@@ -18,7 +18,7 @@ describe('A commander with completable commands', function () {
       var that = this;
       this.program.complete({
         // TODO: Use same lib as from completion
-        // `node test hel|`
+        // `hel|`
         line: 'hel',
         cursor: 'hel'.length
       }, function saveResult (err, results) {
@@ -33,8 +33,22 @@ describe('A commander with completable commands', function () {
   });
 
   describe('when completing a command\'s results', function () {
-    it('completes the command\'s results', function () {
+    before(function (done) {
+      // Complete our input and save results
+      var that = this;
+      this.program.complete({
+        // TODO: Use same lib as from completion
+        // `hello w|`
+        line: 'hello w',
+        cursor: 'hello w'.length
+      }, function saveResult (err, results) {
+        that.results = results;
+        done(err);
+      });
+    });
 
+    it('completes the command\'s results', function () {
+      assert.deepEqual(this.results, ['world']);
     });
   });
 });
