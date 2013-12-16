@@ -1,5 +1,5 @@
 var assert = require('assert');
-var CommanderCompletion = require('../');
+var CommanderCompletion = require('../').Command;
 
 describe('A commander with completable commands', function () {
   before(function () {
