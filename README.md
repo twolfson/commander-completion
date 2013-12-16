@@ -7,12 +7,41 @@ This was built as part of [foundry][], a CLI utility for making releases painles
 [commander.js]: https://github.com/visionmedia/commander.js
 [foundry]: https://github.com/twolfson/foundry
 
+```js
+$ npm pub|
+$ npm publish |
+```
+
 ## Getting Started
 Install the module with: `npm install commander-completion`
 
 ```javascript
-var CommanderCompletion = require('commander-completion');
-commander_completion.awesome(); // "awesome"
+var program = require('commander-completion');
+program.name = 'git';
+program
+  .command('checkout')
+  .completion(function (params, cb) {
+    // For `git checkout dev/|`
+    // params.line = 'git checkout dev'
+    // params.cursor = 17
+    getGitBranches(function (err, allBranches) {
+      if (err) {
+        return cb(err);
+      }
+
+      var branches = allBranches.filter(function (branch) {
+        return params.line.match(branch);
+      });
+      cb(null, branches);
+    });
+  })
+  .action(function () {
+    // Checkout a git branch
+  });
+
+// Parse in arguments (e.g. `COMP_LINE="git che" COMP_POINT=7 git completion`)
+// Logs: ['checkout']
+program.parse(process.argv);
 ```
 
 ## Documentation
