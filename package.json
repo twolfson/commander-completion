@@ -29,7 +29,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "commander": "~2.1.0"
+    "commander": "~2.1.0",
+    "completion": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.11.0",

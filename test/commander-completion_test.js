@@ -4,6 +4,7 @@ var CommanderCompletion = require('../');
 describe('A commander with completable commands', function () {
   before(function () {
     this.program = new CommanderCompletion();
+    this.program.name = 'wat';
     this.program
       .command('hello')
       .completion(function (params, cb) {
@@ -18,9 +19,9 @@ describe('A commander with completable commands', function () {
       var that = this;
       this.program.complete({
         // TODO: Use same lib as from completion
-        // `hel|`
-        line: 'hel',
-        cursor: 'hel'.length
+        // `wat hel|`
+        line: 'wat hel',
+        cursor: 'wat hel'.length
       }, function saveResult (err, results) {
         that.results = results;
         done(err);
@@ -38,9 +39,9 @@ describe('A commander with completable commands', function () {
       var that = this;
       this.program.complete({
         // TODO: Use same lib as from completion
-        // `hello w|`
-        line: 'hello w',
-        cursor: 'hello w'.length
+        // `wat hello w|`
+        line: 'wat hello w',
+        cursor: 'wat hello w'.length
       }, function saveResult (err, results) {
         that.results = results;
         done(err);

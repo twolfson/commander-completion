@@ -1,12 +1,17 @@
 # commander-completion [![Build status](https://travis-ci.org/twolfson/commander-completion.png?branch=master)](https://travis-ci.org/twolfson/commander-completion)
 
-Shell completion for commander.js
+Shell completion for [commander.js][]
+
+This was built as part of [foundry][], a CLI utility for making releases painless.
+
+[commander.js]: https://github.com/visionmedia/commander.js
+[foundry]: https://github.com/twolfson/foundry
 
 ## Getting Started
 Install the module with: `npm install commander-completion`
 
 ```javascript
-var commander_completion = require('commander-completion');
+var CommanderCompletion = require('commander-completion');
 commander_completion.awesome(); // "awesome"
 ```
 
