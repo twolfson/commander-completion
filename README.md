@@ -20,17 +20,18 @@ var program = require('commander-completion');
 program.name = 'git';
 program
   .command('checkout')
-  .completion(function (params, cb) {
+  .completion(function (info, cb) {
     // For `git checkout dev/|`
-    // params.line = 'git checkout dev'
-    // params.cursor = 17
+    // info.words.value = ['git', 'checkout', 'dev/']
+    // info.word.partialLeft = 'dev/'
     getGitBranches(function (err, allBranches) {
       if (err) {
         return cb(err);
       }
 
       var branches = allBranches.filter(function (branch) {
-        return params.line.match(branch);
+        // 'chec' === 'chec' (from 'checkout')
+        return partialLeftWord === branch.substr(0, partialLeftWord.length);
       });
       cb(null, branches);
     });
@@ -64,16 +65,17 @@ Add the new methods added to `commander.js` to another target
 
 - obj `Object` - Target to add new methods to
 
-### `command.completion(_completion)`
+### `command.completion(completionFn)`
 Save completion function to call when completing the current `command`
 
-- _completion `Function` - Error-first callback that will callback with matches
-    -`completion` should have a signature of `function (params, cb)`
-    - params `Object` - A container for information
-        - line `String` - Original string input to `completion.complete`
-        - cursor `Number` - Index within `line` of the cursor
+- completionFn `Function` - Error-first callback that will callback with matches
+    -`completion` should have a signature of `function (info, cb)`
+    - info `Object` - Collection of distilled information about original input
+        - The format will be the returned value from [twolfson/line-info][]
     - cb `Function` - Error-first callback function to run with matches
         - `cb` has a signature of `function (err, results)`
+
+[twolfson/line-info]: https://github.com/twolfson/line-info#lineinfoparams
 
 ### `command.complete(params, cb)`
 Get completion results for current `command`
@@ -94,7 +96,7 @@ program.name = 'git';
 program
   // `git checkout master`
   .command('checkout')
-  .completion(function (params, cb) {
+  .completion(function (info, cb) {
     // Get git branches and find matches
   })
   .action(function () {
@@ -111,7 +113,7 @@ remote
 remote
   // `git remote rm origin`
   .command('rm')
-  .completion(function (params, cb) {
+  .completion(function (info, cb) {
     // Get git branches and find matches
   })
   .action(function () {
