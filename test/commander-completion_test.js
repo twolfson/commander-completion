@@ -73,9 +73,9 @@ describe('A commander with options', function () {
       var that = this;
       this.program.complete({
         // TODO: Use same lib as from completion
-        // `wat hel|`
-        line: 'wat hel',
-        cursor: 'wat hel'.length
+        // `wat -n hel|`
+        line: 'wat -n hel',
+        cursor: 'wat -n hel'.length
       }, function saveResult (err, results) {
         that.results = results;
         done(err);
