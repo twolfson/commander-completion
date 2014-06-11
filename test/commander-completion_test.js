@@ -92,3 +92,11 @@ describe('A commander with options', function () {
     });
   });
 });
+
+describe.skip('A commander with an option that has a required value', function () {
+  // hello --dir <cwd>
+});
+
+describe.skip('A commander with an option that has a optional value', function () {
+  // hello --dir [cwd]
+});
