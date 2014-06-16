@@ -58,9 +58,9 @@ describe('A commander with options', function () {
   before(function () {
     this.program = new CommanderCompletion();
     this.program.name = 'wat';
+    this.program.option('-n, --dry-run', 'Output commands but do nothing');
     this.program
       .command('hello')
-      .option('-n, --dry-run', 'Output commands but do nothing')
       .completion(function (params, cb) {
         cb(null, ['world']);
       })
