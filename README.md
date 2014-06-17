@@ -15,7 +15,7 @@ $ npm publish |
 ## Getting Started
 Install the module with: `npm install commander-completion`
 
-```javascript
+```js
 var program = require('commander-completion');
 program.name = 'git';
 program
@@ -96,6 +96,7 @@ program.name = 'git';
 program
   // `git checkout master`
   .command('checkout')
+  .option('-b', 'Checkout new branch') // `git checkout -b dev/hai`
   .completion(function (info, cb) {
     // Get git branches and find matches
   })
