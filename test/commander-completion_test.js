@@ -1,11 +1,40 @@
 var assert = require('assert');
 var CommanderCompletion = require('../').Command;
 
+var commanderCompletionUtils = {
+  init: function (fn) {
+    before(function createCompletion () {
+      // Create and bind options to completion
+      this.program = new CommanderCompletion();
+      fn.call(this, this.program);
+    });
+    after(function cleanupCompletion () {
+      delete this.program;
+    });
+  },
+  complete: function (command) {
+    before(function saveResults (done) {
+      // TODO: Use same lib as from completion
+      // Complete our input and save results
+      var that = this;
+      this.program.complete({
+        line: 'wat hel',
+        cursor: 'wat hel'.length
+      }, function saveResult (err, results) {
+        that.results = results;
+        done(err);
+      });
+    });
+    after(function cleanupResults () {
+      delete this.results;
+    });
+  }
+};
+
 describe('A commander with completable commands', function () {
-  before(function () {
-    this.program = new CommanderCompletion();
-    this.program.name = 'wat';
-    this.program
+  commanderCompletionUtils.init(function (program) {
+    program.name = 'wat';
+    program
       .command('hello')
       .completion(function (params, cb) {
         cb(null, ['world']);
@@ -14,19 +43,8 @@ describe('A commander with completable commands', function () {
   });
 
   describe('when completing an incomplete command', function () {
-    before(function (done) {
-      // Complete our input and save results
-      var that = this;
-      this.program.complete({
-        // TODO: Use same lib as from completion
-        // `wat hel|`
-        line: 'wat hel',
-        cursor: 'wat hel'.length
-      }, function saveResult (err, results) {
-        that.results = results;
-        done(err);
-      });
-    });
+    // `wat hel|`
+    commanderCompletionUtils.complete('wat hel');
 
     it('completes the command', function () {
       assert.deepEqual(this.results, ['hello']);
@@ -105,7 +123,7 @@ describe('A commander with options', function () {
     });
   });
 
-  describe.skip('completing a command without options', function () {
+  describe('completing a command without options', function () {
     it('completes the command', function () {
     });
   });
