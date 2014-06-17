@@ -67,15 +67,33 @@ describe('A commander with options', function () {
       .action(function () {});
   });
 
-  describe.only('completing a command with options', function () {
+  describe('completing a command with a short option', function () {
     before(function (done) {
       // Complete our input and save results
       var that = this;
       this.program.complete({
-        // TODO: Use same lib as from completion
         // `wat -n hel|`
         line: 'wat -n hel',
         cursor: 'wat -n hel'.length
+      }, function saveResult (err, results) {
+        that.results = results;
+        done(err);
+      });
+    });
+
+    it('completes the command', function () {
+      assert.deepEqual(this.results, ['hello']);
+    });
+  });
+
+  describe('completing a command with a long option', function () {
+    before(function (done) {
+      // Complete our input and save results
+      var that = this;
+      this.program.complete({
+        // `wat --dry-run hel|`
+        line: 'wat --dry-run hel',
+        cursor: 'wat --dry-run hel'.length
       }, function saveResult (err, results) {
         that.results = results;
         done(err);
