@@ -14,10 +14,11 @@ var commanderCompletionUtils = {
   },
   complete: function (command) {
     before(function saveResults (done) {
-      // TODO: Use same lib as from completion
       // Complete our input and save results
       var that = this;
       this.program.complete({
+        // (e.g. `hai wo|`)
+        // TODO: Use same lib as from completion (e.g. `hai wo|rld`)
         line: command,
         cursor: command.length
       }, function saveResult (err, results) {
@@ -43,7 +44,6 @@ describe('A commander with completable commands', function () {
   });
 
   describe('when completing an incomplete command', function () {
-    // `wat hel|`
     commanderCompletionUtils.complete('wat hel');
 
     it('completes the command', function () {
@@ -52,7 +52,6 @@ describe('A commander with completable commands', function () {
   });
 
   describe('when completing a command\'s results', function () {
-    // `wat hello w|`
     commanderCompletionUtils.complete('wat hello w');
 
     it('completes the command\'s results', function () {
@@ -74,7 +73,6 @@ describe('A commander with options', function () {
   });
 
   describe('completing a command with a short option', function () {
-    // `wat -n hel|`
     commanderCompletionUtils.complete('wat -n hel');
 
     it('completes the command', function () {
@@ -83,7 +81,6 @@ describe('A commander with options', function () {
   });
 
   describe('completing a command with a long option', function () {
-    // `wat --dry-run hel|`
     commanderCompletionUtils.complete('wat --dry-run hel');
 
     it('completes the command', function () {
