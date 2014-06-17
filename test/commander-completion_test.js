@@ -18,8 +18,8 @@ var commanderCompletionUtils = {
       // Complete our input and save results
       var that = this;
       this.program.complete({
-        line: 'wat hel',
-        cursor: 'wat hel'.length
+        line: command,
+        cursor: command.length
       }, function saveResult (err, results) {
         that.results = results;
         done(err);
@@ -52,19 +52,8 @@ describe('A commander with completable commands', function () {
   });
 
   describe('when completing a command\'s results', function () {
-    before(function (done) {
-      // Complete our input and save results
-      var that = this;
-      this.program.complete({
-        // TODO: Use same lib as from completion
-        // `wat hello w|`
-        line: 'wat hello w',
-        cursor: 'wat hello w'.length
-      }, function saveResult (err, results) {
-        that.results = results;
-        done(err);
-      });
-    });
+    // `wat hello w|`
+    commanderCompletionUtils.complete('wat hello w');
 
     it('completes the command\'s results', function () {
       assert.deepEqual(this.results, ['world']);
@@ -73,8 +62,7 @@ describe('A commander with completable commands', function () {
 });
 
 describe('A commander with options', function () {
-  before(function () {
-    this.program = new CommanderCompletion();
+  commanderCompletionUtils.init(function (program) {
     this.program.name = 'wat';
     this.program.option('-n, --dry-run', 'Output commands but do nothing');
     this.program
@@ -86,18 +74,8 @@ describe('A commander with options', function () {
   });
 
   describe('completing a command with a short option', function () {
-    before(function (done) {
-      // Complete our input and save results
-      var that = this;
-      this.program.complete({
-        // `wat -n hel|`
-        line: 'wat -n hel',
-        cursor: 'wat -n hel'.length
-      }, function saveResult (err, results) {
-        that.results = results;
-        done(err);
-      });
-    });
+    // `wat -n hel|`
+    commanderCompletionUtils.complete('wat -n hel');
 
     it('completes the command', function () {
       assert.deepEqual(this.results, ['hello']);
@@ -105,18 +83,8 @@ describe('A commander with options', function () {
   });
 
   describe('completing a command with a long option', function () {
-    before(function (done) {
-      // Complete our input and save results
-      var that = this;
-      this.program.complete({
-        // `wat --dry-run hel|`
-        line: 'wat --dry-run hel',
-        cursor: 'wat --dry-run hel'.length
-      }, function saveResult (err, results) {
-        that.results = results;
-        done(err);
-      });
-    });
+    // `wat --dry-run hel|`
+    commanderCompletionUtils.complete('wat --dry-run hel');
 
     it('completes the command', function () {
       assert.deepEqual(this.results, ['hello']);
