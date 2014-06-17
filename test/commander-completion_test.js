@@ -89,7 +89,10 @@ describe('A commander with options', function () {
   });
 
   describe('completing a command without options', function () {
+    commanderCompletionUtils.complete('wat hel');
+
     it('completes the command', function () {
+      assert.deepEqual(this.results, ['hello']);
     });
   });
 });
