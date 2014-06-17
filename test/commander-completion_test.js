@@ -127,7 +127,7 @@ describe('A commander with an option that has a required value', function () {
   });
 });
 
-describe.only('A commander with an option that has a optional value', function () {
+describe('A commander with an option that has a optional value', function () {
   commanderCompletionUtils.init(function (program) {
     this.program.name = 'hello';
     // TODO: Open issue for handling completion on options
