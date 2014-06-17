@@ -97,8 +97,34 @@ describe('A commander with options', function () {
   });
 });
 
-describe.skip('A commander with an option that has a required value', function () {
-  // hello --dir <cwd>
+describe.only('A commander with an option that has a required value', function () {
+  commanderCompletionUtils.init(function (program) {
+    this.program.name = 'hello';
+    // TODO: Open issue for handling completion on options
+    this.program.option('-d, --dir <cwd>', 'Specify directory');
+    this.program
+      .command('places')
+      .completion(function (params, cb) {
+        cb(null, ['world']);
+      })
+      .action(function () {});
+  });
+
+  describe('completing a command with the option and no further values', function () {
+    commanderCompletionUtils.complete('hello --dir hai');
+
+    it('returns no matching results', function () {
+      assert.deepEqual(this.results, []);
+    });
+  });
+
+  describe('completing a command with the option and a partial values', function () {
+    commanderCompletionUtils.complete('hello --dir huh pla');
+
+    it('returns no matching results', function () {
+      assert.deepEqual(this.results, ['places']);
+    });
+  });
 });
 
 describe.skip('A commander with an option that has a optional value', function () {
