@@ -100,7 +100,6 @@ describe('A commander with options', function () {
 describe('A commander with an option that has a required value', function () {
   commanderCompletionUtils.init(function (program) {
     this.program.name = 'hello';
-    // TODO: Open issue for handling completion on options
     this.program.option('-d, --dir <cwd>', 'Specify directory');
     this.program
       .command('places')
@@ -130,7 +129,6 @@ describe('A commander with an option that has a required value', function () {
 describe('A commander with an option that has a optional value', function () {
   commanderCompletionUtils.init(function (program) {
     this.program.name = 'hello';
-    // TODO: Open issue for handling completion on options
     this.program.option('-d, --dir [cwd]', 'Specify directory');
     this.program
       .command('places')
