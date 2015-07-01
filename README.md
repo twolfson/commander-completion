@@ -134,7 +134,7 @@ program.complete({
   line: 'git remote ',
   cursor: 11
 }, function (err, results) {
-  results; // ['add', 'remove']
+  results; // ['add', 'rm']
 });
 ```
 ## Contributing
