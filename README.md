@@ -54,7 +54,7 @@ program.parse(process.argv);
 ```
 
 ## Documentation
-`commander-completion` exposes a mixin function, `mixinCommanderCompletion`, as its `module.exports`. In addition to this, we expose a few more methods.
+`commander-completion` exposes a mixin function, `mixinCommanderCompletion`, as its `module.exports`. After we mixin to `Commander.js`, we add more methods onto `command()` objects.
 
 Currently, you are required to specify the `name` property of your `program`.
 
