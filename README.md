@@ -1,10 +1,10 @@
 # commander-completion [![Build status](https://travis-ci.org/twolfson/commander-completion.svg?branch=master)](https://travis-ci.org/twolfson/commander-completion)
 
-Shell completion for [commander.js][]
+Shell completion for [Commander.js][]
 
 This was built as part of [foundry][], a CLI utility for making releases painless.
 
-[commander.js]: https://github.com/visionmedia/commander.js
+[Commander.js]: https://github.com/tj/commander.js
 [foundry]: https://github.com/twolfson/foundry
 
 ```js
@@ -16,7 +16,7 @@ $ npm publish |
 Install the module with: `npm install commander-completion`
 
 ```js
-var program = require('commander-completion');
+var program = require('commander-completion')(require('commander'));
 program.name = 'git';
 program
   .command('checkout')
@@ -54,18 +54,18 @@ program.parse(process.argv);
 ```
 
 ## Documentation
-`commander-completion` exposes [`commander.js`][] as its `module.exports`. In addition to this, we expose a few more methods.
+`commander-completion` exposes a mixin function, `mixinCommanderCompletion`, as its `module.exports`. In addition to this, we expose a few more methods.
 
 Currently, you are required to specify the `name` property of your `program`.
 
-[`commander.js`]: http://visionmedia.github.io/commander.js/
+### `mixinCommanderCompletion(commander)`
+Add new completion methods to `Commander.js' Command` objects
 
-### `program.mixinCompletable(obj)`
-Add the new methods added to `commander.js` to another target
+- commander `Object` - Instance of `Commander.js`
 
-- obj `Object` - Target to add new methods to
+### `Command.completion(completionFn)`
+New method available on `Commander.js Commands` (e.g. `program.command('remote').completion(completionFn)`)
 
-### `command.completion(completionFn)`
 Save completion function to call when completing the current `command`
 
 - completionFn `Function` - Error-first callback that will callback with matches
@@ -77,7 +77,9 @@ Save completion function to call when completing the current `command`
 
 [twolfson/line-info]: https://github.com/twolfson/line-info#lineinfoparams
 
-### `command.complete(params, cb)`
+### `Command.complete(params, cb)`
+New method available on `Commander.js Commands` (e.g. `program.command('remote').complete(params, cb)`)
+
 Get completion results for current `command`
 
 - params `Object` - Information similar to that passed in by `bash's` tab completion
@@ -91,7 +93,7 @@ Get completion results for current `command`
 An full example of `git` would be
 
 ```js
-var program = require('commander-completion');
+var program = require('commander-completion')(require('commander'));
 program.name = 'git';
 program
   // `git checkout master`

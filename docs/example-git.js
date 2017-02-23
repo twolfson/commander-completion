@@ -1,4 +1,4 @@
-var program = require('../');
+var program = require('../')(require('commander'));
 program.name = 'git';
 program
   // `git checkout master`
