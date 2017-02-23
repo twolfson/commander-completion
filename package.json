@@ -25,10 +25,10 @@
     "test": "mocha && npm run lint"
   },
   "dependencies": {
-    "commander": "~2.9.0",
     "completion": "~1.0.1"
   },
   "devDependencies": {
+    "commander": "~2.9.0",
     "foundry": "~4.3.3",
     "foundry-release-git": "~2.0.2",
     "foundry-release-npm": "~2.0.2",
