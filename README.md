@@ -1,4 +1,4 @@
-# commander-completion [![Build status](https://travis-ci.org/twolfson/commander-completion.png?branch=master)](https://travis-ci.org/twolfson/commander-completion)
+# commander-completion [![Build status](https://travis-ci.org/twolfson/commander-completion.svg?branch=master)](https://travis-ci.org/twolfson/commander-completion)
 
 Shell completion for [commander.js][]
 
