@@ -23,20 +23,21 @@
   ],
   "main": "lib/commander-completion",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 4.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "lint": "twolfson-style lint lib/ test/",
+    "test": "mocha && npm run lint"
   },
   "dependencies": {
     "commander": "~2.1.0",
     "completion": "~1.0.1"
   },
   "devDependencies": {
-    "mocha": "~1.11.0",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.4.0"
+    "jscs": "~3.0.7",
+    "jshint": "~2.9.4",
+    "mocha": "~3.2.0",
+    "twolfson-style": "~1.6.1"
   },
   "keywords": [
     "complete",
