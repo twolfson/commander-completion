@@ -25,7 +25,7 @@
     "test": "mocha && npm run lint"
   },
   "dependencies": {
-    "commander": "~2.1.0",
+    "commander": "~2.9.0",
     "completion": "~1.0.1"
   },
   "devDependencies": {
