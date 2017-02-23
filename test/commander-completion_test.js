@@ -1,5 +1,6 @@
 var assert = require('assert');
-var CommanderCompletion = require('../').Command;
+var commander = require('../')(require('commander'));
+var CommanderCompletion = commander.Command;
 
 var commanderCompletionUtils = {
   init: function (fn) {
