@@ -1,4 +1,6 @@
 # commander-completion changelog
+0.4.2 - Updated package development tools (e.g. linting, testing, CI)
+
 0.4.1 - Fixed `git` example in README via @drifkin in #5
 
 0.4.0 - Added option support. Fixes #3
