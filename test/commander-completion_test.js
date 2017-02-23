@@ -163,3 +163,37 @@ describe('A commander with an option that has a optional value', function () {
     });
   });
 });
+
+// https://github.com/twolfson/commander-completion/issues/7
+// https://github.com/tj/commander.js/tree/v2.9.0#coercion
+describe('A commander with an option that loads via coercion', function () {
+  commanderCompletionUtils.init(function (program) {
+    this.program.name = 'hello';
+    this.program.option('-c, --collect <value>', 'Collect multiple values', function collect (val, memo) {
+      memo.push(val);
+      return memo;
+    }, []);
+    this.program
+      .command('places')
+      .completion(function (params, cb) {
+        cb(null, ['world']);
+      })
+      .action(function () {});
+  });
+
+  describe('completing a command with the option and no further values', function () {
+    commanderCompletionUtils.complete('hello --collect hai');
+
+    it('returns no matching results', function () {
+      assert.deepEqual(this.results, []);
+    });
+  });
+
+  describe('completing a command with the option and a partial value', function () {
+    commanderCompletionUtils.complete('hello --collect huh pla');
+
+    it('returns no matching results', function () {
+      assert.deepEqual(this.results, ['places']);
+    });
+  });
+});
