@@ -144,12 +144,12 @@ program.complete({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via `npm run lint` and test via `npm test`.
 
 ## Donating
-Support this project and [others by twolfson][gratipay] via [gratipay][].
+Support this project and [others by twolfson][twolfson-projects] via [donations][twolfson-support-me].
 
-[![Support via Gratipay][gratipay-badge]][gratipay]
+<http://twolfson.com/support-me>
 
-[gratipay-badge]: https://cdn.rawgit.com/gratipay/gratipay-badge/2.x.x/dist/gratipay.svg
-[gratipay]: https://www.gratipay.com/twolfson/
+[twolfson-projects]: http://twolfson.com/projects
+[twolfson-support-me]: http://twolfson.com/support-me
 
 ## Unlicense
 As of Dec 16 2013, Todd Wolfson has released this repository and its contents to the public domain.
