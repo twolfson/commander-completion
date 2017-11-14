@@ -1,7 +1,7 @@
 {
   "name": "commander-completion",
   "description": "Shell completion for commander.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/twolfson/commander-completion",
   "author": {
     "name": "Todd Wolfson",

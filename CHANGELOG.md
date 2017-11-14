@@ -1,4 +1,6 @@
 # commander-completion changelog
+1.0.1 - Replaced Gratipay with support me page
+
 1.0.0 - Updated API to remove direct dependency on `commander`
 
 0.5.0 - Upgraded to `commander@2.9.0` to resolve legacy issues
